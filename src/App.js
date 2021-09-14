@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-import mapboxgl from 'mapbox-gl';
+import './index.css';
+import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import * as turf from '@turf/turf';
 
 mapboxgl.accessToken =
