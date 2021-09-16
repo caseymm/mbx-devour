@@ -26,6 +26,16 @@ export default class App extends React.PureComponent {
       zoom: zoom
     });
 
+    const showDiv = () => {
+      setTimeout(function(){
+        console.log('loaded')
+        // signal done
+        const Div = document.createElement('div');
+        Div.id = 'hidden';
+        document.getElementsByClassName('map-container')[0].appendChild(Div);
+      }, 10000)
+    }
+
     const params = window.location.search
     .slice(1)
     .split('&')
@@ -37,6 +47,7 @@ export default class App extends React.PureComponent {
     async function loadMap() {
       const resp = await fetch(params.url);
       const json = await resp.json();
+      console.log(json)
   
       map.on('load', () => {
         // Add a data source containing GeoJSON data.
@@ -71,11 +82,7 @@ export default class App extends React.PureComponent {
         const bounds = turf.bbox(json);
         map.fitBounds(bounds, { padding: 100, duration: 0 });
         
-        // signal done
-        const Div = document.createElement('div');
-        Div.id = 'hidden';
-        document.getElementsByClassName('map-container')[0].appendChild(Div);
-      });
+      }, showDiv());
     }
     loadMap();
   }
