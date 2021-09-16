@@ -38,7 +38,6 @@ export default class App extends React.PureComponent {
       const resp = await fetch(params.url);
       const json = await resp.json();
       console.log(json)
-  
       map.on('load', () => {
         // Add a data source containing GeoJSON data.
         map.addSource('data', {
@@ -71,16 +70,14 @@ export default class App extends React.PureComponent {
   
         const bounds = turf.bbox(json);
         map.fitBounds(bounds, { padding: 100, duration: 0 });
-        
+        map.on('idle', () => {
+          console.log('loaded')
+          // signal done
+          const Div = document.createElement('div');
+          Div.id = 'hidden';
+          document.getElementsByClassName('map-container')[0].appendChild(Div);
+        })
       });
-
-      map.on('idle', () => {
-        console.log('loaded')
-        // signal done
-        const Div = document.createElement('div');
-        Div.id = 'hidden';
-        document.getElementsByClassName('map-container')[0].appendChild(Div);
-      })
     }
     loadMap();
   }
