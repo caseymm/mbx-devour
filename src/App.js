@@ -34,10 +34,13 @@ export default class App extends React.PureComponent {
 
     console.log(params);
 
-    async function loadMap() {
+    async function loadData() {
       const resp = await fetch(params.url);
       const json = await resp.json();
-      console.log(json)
+      return json;
+    }
+
+    loadData().then(json => {
       map.on('load', () => {
         // Add a data source containing GeoJSON data.
         map.addSource('data', {
@@ -78,8 +81,7 @@ export default class App extends React.PureComponent {
           document.getElementsByClassName('map-container')[0].appendChild(Div);
         })
       });
-    }
-    loadMap();
+    });
   }
 
   render() {
