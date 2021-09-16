@@ -26,6 +26,19 @@ export default class App extends React.PureComponent {
       zoom: zoom
     });
 
+    map.onLoad = function(cb) {
+      if  (map.loaded()) {
+          cb();
+      } else if (!map.areTilesLoaded()) {
+          map.once('data', cb);
+      } else if (!map.isStyleLoaded()) {
+          map.once('styledata', cb);
+      } else {
+          console.log("Map is not ready but is not not-ready either.");
+      }
+      return map;
+  };
+
     const params = window.location.search
     .slice(1)
     .split('&')
@@ -49,17 +62,28 @@ export default class App extends React.PureComponent {
     }
 
     loadData().then(json => {
-      map.on('load', () => {
-        map.addSource('data', {
+      var ready = false;
+      map.on('load', function () { ready = true; });
+
+      function onReady(cb) {
+          if  (ready) {
+              cb();
+          } else {
+              map.on('load', cb);
+          }
+      }
+
+      onReady(() => {
+        map.addSource('data-json', {
           type: 'geojson',
           data: json,
         });
   
         // Add a new layer to visualize the polygon.
         map.addLayer({
-          id: 'data',
+          id: 'data-json-layer',
           type: 'fill',
-          source: 'data', // reference the data source
+          source: 'data-json', // reference the data source
           layout: {},
           paint: {
             'fill-color': `#${params.fill}`,
@@ -70,17 +94,19 @@ export default class App extends React.PureComponent {
         map.addLayer({
           id: 'outline',
           type: 'line',
-          source: 'data',
+          source: 'data-json',
           layout: {},
           paint: {
             'line-color': `#${params.fill}`,
             'line-width': 2,
           },
         });
-  
+        console.log('hello')
         const bounds = turf.bbox(json);
         map.fitBounds(bounds, { padding: 100, duration: 0 });
-      }, postDiv());
+        postDiv();
+      })
+
     });
   }
 
