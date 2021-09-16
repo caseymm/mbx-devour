@@ -26,16 +26,6 @@ export default class App extends React.PureComponent {
       zoom: zoom
     });
 
-    const showDiv = () => {
-      setTimeout(function(){
-        console.log('loaded')
-        // signal done
-        const Div = document.createElement('div');
-        Div.id = 'hidden';
-        document.getElementsByClassName('map-container')[0].appendChild(Div);
-      }, 10000)
-    }
-
     const params = window.location.search
     .slice(1)
     .split('&')
@@ -82,7 +72,15 @@ export default class App extends React.PureComponent {
         const bounds = turf.bbox(json);
         map.fitBounds(bounds, { padding: 100, duration: 0 });
         
-      }, showDiv());
+      });
+
+      map.on('idle', () => {
+        console.log('loaded')
+        // signal done
+        const Div = document.createElement('div');
+        Div.id = 'hidden';
+        document.getElementsByClassName('map-container')[0].appendChild(Div);
+      })
     }
     loadMap();
   }
