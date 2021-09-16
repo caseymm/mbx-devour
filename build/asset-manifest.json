@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/mbx-devour/static/css/main.7cc88deb.chunk.css",
-    "main.js": "/mbx-devour/static/js/main.120352cf.chunk.js",
-    "main.js.map": "/mbx-devour/static/js/main.120352cf.chunk.js.map",
+    "main.css": "/mbx-devour/static/css/main.eb811fba.chunk.css",
+    "main.js": "/mbx-devour/static/js/main.219be128.chunk.js",
+    "main.js.map": "/mbx-devour/static/js/main.219be128.chunk.js.map",
     "runtime-main.js": "/mbx-devour/static/js/runtime-main.b1405aa5.js",
     "runtime-main.js.map": "/mbx-devour/static/js/runtime-main.b1405aa5.js.map",
     "static/css/2.f0a50d26.chunk.css": "/mbx-devour/static/css/2.f0a50d26.chunk.css",
@@ -10,14 +10,14 @@
     "static/js/2.17402e7c.chunk.js.map": "/mbx-devour/static/js/2.17402e7c.chunk.js.map",
     "index.html": "/mbx-devour/index.html",
     "static/css/2.f0a50d26.chunk.css.map": "/mbx-devour/static/css/2.f0a50d26.chunk.css.map",
-    "static/css/main.7cc88deb.chunk.css.map": "/mbx-devour/static/css/main.7cc88deb.chunk.css.map",
+    "static/css/main.eb811fba.chunk.css.map": "/mbx-devour/static/css/main.eb811fba.chunk.css.map",
     "static/js/2.17402e7c.chunk.js.LICENSE.txt": "/mbx-devour/static/js/2.17402e7c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b1405aa5.js",
     "static/css/2.f0a50d26.chunk.css",
     "static/js/2.17402e7c.chunk.js",
-    "static/css/main.7cc88deb.chunk.css",
-    "static/js/main.120352cf.chunk.js"
+    "static/css/main.eb811fba.chunk.css",
+    "static/js/main.219be128.chunk.js"
   ]
 }

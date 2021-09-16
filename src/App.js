@@ -70,6 +70,11 @@ export default class App extends React.PureComponent {
   
         const bounds = turf.bbox(json);
         map.fitBounds(bounds, { padding: 100, duration: 0 });
+        
+        // signal done
+        const Div = document.createElement('div');
+        Div.id = 'hidden';
+        document.getElementsByClassName('map-container')[0].appendChild(Div);
       });
     }
     loadMap();
