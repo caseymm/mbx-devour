@@ -34,6 +34,14 @@ export default class App extends React.PureComponent {
 
     console.log(params);
 
+    const postDiv = () => {
+      console.log('loaded')
+      // signal done
+      const Div = document.createElement('div');
+      Div.id = 'hidden';
+      document.getElementsByClassName('map-container')[0].appendChild(Div);
+    }
+
     async function loadData() {
       const resp = await fetch(params.url);
       const json = await resp.json();
@@ -42,7 +50,6 @@ export default class App extends React.PureComponent {
 
     loadData().then(json => {
       map.on('load', () => {
-        // Add a data source containing GeoJSON data.
         map.addSource('data', {
           type: 'geojson',
           data: json,
@@ -55,11 +62,11 @@ export default class App extends React.PureComponent {
           source: 'data', // reference the data source
           layout: {},
           paint: {
-            'fill-color': `#${params.fill}`, // blue color fill
+            'fill-color': `#${params.fill}`,
             'fill-opacity': parseFloat(params['fill-opacity']),
           },
         });
-        // Add a black outline around the polygon.
+        
         map.addLayer({
           id: 'outline',
           type: 'line',
@@ -73,14 +80,7 @@ export default class App extends React.PureComponent {
   
         const bounds = turf.bbox(json);
         map.fitBounds(bounds, { padding: 100, duration: 0 });
-        map.on('idle', () => {
-          console.log('loaded')
-          // signal done
-          const Div = document.createElement('div');
-          Div.id = 'hidden';
-          document.getElementsByClassName('map-container')[0].appendChild(Div);
-        })
-      });
+      }, postDiv());
     });
   }
 
