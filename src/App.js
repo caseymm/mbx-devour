@@ -101,10 +101,14 @@ export default class App extends React.PureComponent {
             'line-width': 2,
           },
         });
-        console.log('hello')
+      
         const bounds = turf.bbox(json);
         map.fitBounds(bounds, { padding: 100, duration: 0 });
-        postDiv();
+        setTimeout(function(){
+          console.log('brb crying');
+          postDiv();
+        }, 3000)
+        
       })
 
     });
