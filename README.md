@@ -7,7 +7,7 @@ This is a basic mapbox map hosted at [caseymm.github.io/mbx-devour](caseymm.gith
 - fill opacity (e.g. .5)
 
 An example url would be built like this: 
-https://caseymm.github.io/mbx-devour/?url=[your url]&fill=[your color]&fill-opacity=[your opacity]
+`https://caseymm.github.io/mbx-devour/?url=[your url]&fill=[your color]&fill-opacity=[your opacity]`
 
 e.g. 
 https://caseymm.github.io/mbx-devour/?url=https://weather-warnings.s3.us-west-1.amazonaws.com/rfw/latest.json&fill=e60000&fill-opacity=.6
