@@ -19,6 +19,7 @@ export default class App extends React.PureComponent {
 
   componentDidMount() {
     const { lng, lat, zoom } = this.state;
+    let loaded = false;
     const map = new mapboxgl.Map({
       container: this.mapContainer.current,
       style: 'mapbox://styles/caseymmiler/cktf3jdcs2ws819qttibvokom',
@@ -48,8 +49,16 @@ export default class App extends React.PureComponent {
       return json;
     }
 
+    setTimeout(function(){
+      if(!loaded){
+        window.location.reload();
+      }
+    }, 2000)
+
     loadData().then(json => {
       map.on('load', function () {
+        console.log('ran load')
+        loaded = true;
         map.addSource('data-json', {
           type: 'geojson',
           data: json,
