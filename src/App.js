@@ -26,19 +26,6 @@ export default class App extends React.PureComponent {
       zoom: zoom
     });
 
-    map.onLoad = function(cb) {
-      if  (map.loaded()) {
-          cb();
-      } else if (!map.areTilesLoaded()) {
-          map.once('data', cb);
-      } else if (!map.isStyleLoaded()) {
-          map.once('styledata', cb);
-      } else {
-          console.log("Map is not ready but is not not-ready either.");
-      }
-      return map;
-  };
-
     const params = window.location.search
     .slice(1)
     .split('&')
@@ -62,18 +49,7 @@ export default class App extends React.PureComponent {
     }
 
     loadData().then(json => {
-      var ready = false;
-      map.on('load', function () { ready = true; });
-
-      function onReady(cb) {
-          if  (ready) {
-              cb();
-          } else {
-              map.on('load', cb);
-          }
-      }
-
-      onReady(() => {
+      map.on('load', function () {
         map.addSource('data-json', {
           type: 'geojson',
           data: json,
@@ -108,9 +84,7 @@ export default class App extends React.PureComponent {
           console.log('brb crying');
           postDiv();
         }, 3000)
-        
-      })
-
+      });
     });
   }
 
