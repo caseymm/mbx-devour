@@ -43,58 +43,58 @@ export default class App extends React.PureComponent {
       document.getElementsByClassName('map-container')[0].appendChild(Div);
     }
 
-    async function loadData() {
-      const resp = await fetch(params.url);
-      const json = await resp.json();
-      return json;
-    }
-
     setTimeout(function(){
       if(!loaded){
         window.location.reload();
       }
     }, 2000)
 
+    async function loadData() {
+      const resp = await fetch(params.url);
+      const json = await resp.json();
+      return json;
+    }
+
     loadData().then(json => {
-      map.on('load', function () {
-        console.log('ran load')
-        loaded = true;
-        map.addSource('data-json', {
-          type: 'geojson',
-          data: json,
-        });
-  
-        // Add a new layer to visualize the polygon.
-        map.addLayer({
-          id: 'data-json-layer',
-          type: 'fill',
-          source: 'data-json', // reference the data source
-          layout: {},
-          paint: {
-            'fill-color': `#${params.fill}`,
-            'fill-opacity': parseFloat(params['fill-opacity']),
-          },
-        });
-        
-        map.addLayer({
-          id: 'outline',
-          type: 'line',
-          source: 'data-json',
-          layout: {},
-          paint: {
-            'line-color': `#${params.fill}`,
-            'line-width': 2,
-          },
-        });
-      
-        const bounds = turf.bbox(json);
-        map.fitBounds(bounds, { padding: 100, duration: 0 });
-        setTimeout(function(){
-          console.log('brb crying');
-          postDiv();
-        }, 3000)
+      // map.on('load', function () {
+      console.log('ran load')
+      loaded = true;
+      map.addSource('data-json', {
+        type: 'geojson',
+        data: json,
       });
+
+      // Add a new layer to visualize the polygon.
+      map.addLayer({
+        id: 'data-json-layer',
+        type: 'fill',
+        source: 'data-json', // reference the data source
+        layout: {},
+        paint: {
+          'fill-color': `#${params.fill}`,
+          'fill-opacity': parseFloat(params['fill-opacity']),
+        },
+      });
+      
+      map.addLayer({
+        id: 'outline',
+        type: 'line',
+        source: 'data-json',
+        layout: {},
+        paint: {
+          'line-color': `#${params.fill}`,
+          'line-width': 2,
+        },
+      });
+    
+      const bounds = turf.bbox(json);
+      map.fitBounds(bounds, { padding: 100, duration: 0 });
+      setTimeout(function(){
+        console.log('brb crying');
+        postDiv();
+      }, 3000)
     });
+    // });
   }
 
   render() {
