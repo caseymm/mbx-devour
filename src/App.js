@@ -47,7 +47,7 @@ export default class App extends React.PureComponent {
       if(!loaded){
         window.location.reload();
       }
-    }, 2000)
+    }, 3000)
 
     async function loadData() {
       const resp = await fetch(params.url);
@@ -92,7 +92,7 @@ export default class App extends React.PureComponent {
       setTimeout(function(){
         console.log('brb crying');
         postDiv();
-      }, 3000)
+      }, 5000)
     });
     // });
   }
